@@ -1,0 +1,108 @@
+/* position.css */
+
+/* Style général pour la page */
+body {
+  font-family: 'Arial', sans-serif; /* Même police que monstyle.css */
+  background: #ffffff; /* Fond beige clair, cohérent avec monstyle.css */
+  color: #333; /* Couleur de texte principale */
+  line-height: 1.6; /* Hauteur de ligne pour lisibilité */
+}
+
+/* Style pour le conteneur principal */
+.container {
+  max-width: 1200px; /* Largeur maximale plus grande pour accueillir la carte */
+  margin: 20px auto; /* Centre horizontalement avec marge */
+  padding: 20px; /* Espacement intérieur */
+  background: #fff; /* Fond blanc pour contraste */
+  border-radius: 8px; /* Coins arrondis, cohérent avec monstyle.css */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour profondeur */
+}
+
+/* Style pour le titre de la section */
+.container h2 {
+  color: #333; /* Couleur de texte */
+  font-size: 2em; /* Taille du texte */
+  margin perspective: center; /* Centre le texte */
+  margin-bottom: 20px; /* Espacement sous le titre */
+}
+
+/* Style pour la carte */
+#map {
+  height: 500px; /* Hauteur de la carte (comme dans votre HTML) */
+  width: 100%; /* Pleine largeur */
+  border-radius: 8px; /* Coins arrondis */
+  border: 1px solid #ccc; /* Bordure légère pour délimiter la carte */
+}
+
+/* Style pour le tableau */
+.collier-table {
+  width: 100%; /* Pleine largeur */
+  border-collapse: collapse; /* Supprime les espaces entre les cellules */
+  margin-top: 20px; /* Espacement au-dessus du tableau */
+}
+
+/* Style pour les en-têtes du tableau */
+.collier-table th {
+  background-color: #555; /* Fond gris foncé, cohérent avec les survols de monstyle.css */
+  color: #fff; /* Texte blanc */
+  padding: 12px; /* Espacement intérieur */
+  text-align: left; /* Alignement à gauche */
+  font-weight: bold; /* Texte en gras */
+  border-bottom: 2px solid #333; /* Bordure inférieure */
+}
+
+/* Style pour les cellules du tableau */
+.collier-table td {
+  padding: 12px; /* Espacement intérieur */
+  border-bottom: 1px solid #ccc; /* Bordure inférieure légère */
+}
+
+/* Style pour les lignes du tableau au survol */
+.collier-table tr:hover {
+  background-color: #f9f9f9; /* Fond gris clair au survol */
+  transition: background-color 0.3s ease; /* Transition fluide */
+}
+
+/* Style pour le texte dans les cellules */
+.collier-table td, .collier-table th {
+  font-size: 1em; /* Taille de texte cohérente */
+  color: #333; /* Couleur de texte */
+}
+
+/* Style pour les lignes sans données */
+.collier-table tr td[colspan="5"] {
+  text-align: center; /* Centre le texte */
+  color: #666; /* Texte gris pour le message "Aucun collier trouvé" */
+  padding: 20px; /* Espacement plus grand */
+}
+
+/* Responsivité pour écrans jusqu'à 768px */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px; /* Réduit le padding */
+  }
+
+  .container h2 {
+    font-size: 1.5em; /* Réduit la taille du titre */
+  }
+
+  #map {
+    height: 300px; /* Réduit la hauteur de la carte pour petits écrans */
+  }
+
+  .collier-table th, .collier-table td {
+    padding: 8px; /* Réduit l'espacement dans le tableau */
+    font-size: 0.9em; /* Réduit la taille du texte */
+  }
+}
+
+/* Responsivité pour très petits écrans (jusqu'à 600px) */
+@media (max-width: 600px) {
+  .collier-table {
+    font-size: 0.85em; /* Texte encore plus petit */
+  }
+
+  .collier-table th, .collier-table td {
+    padding: 6px; /* Espacement encore réduit */
+  }
+}

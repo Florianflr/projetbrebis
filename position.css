@@ -1,0 +1,80 @@
+/* Section dédiée à la recherche et à la liste des troupeaux */
+.recherche-troupeaux {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff3e0;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Recherche */
+.recherche label {
+  display: block;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.recherche input[type="search"] {
+  padding: 10px 20px;
+  width: 70%;
+  max-width: 400px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.recherche input[type="search"]:focus {
+  border-color: #585a58;
+}
+
+.recherche button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  background-color: #585a58;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.recherche button:hover {
+  background-color: #585a58;
+}
+
+/* Liste des troupeaux */
+.liste-troupeaux {
+  list-style: none;
+  padding: 0;
+  margin-top: 25px;
+}
+
+.liste-troupeaux li {
+  display: inline-block;
+  margin: 10px 15px;
+}
+
+.liste-troupeaux a {
+  padding: 12px 20px;
+  background-color: #585a58;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.liste-troupeaux a:hover {
+  background-color: #585a58;
+  transform: scale(1.05);
+}
+
+.recherche label {
+  display: none;
+}

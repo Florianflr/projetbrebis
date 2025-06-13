@@ -1,0 +1,88 @@
+/* Conteneur principal */
+.conteneur {
+    background-color: #fff; /* Fond blanc */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 30px auto;
+}
+
+/* Titres */
+h2 {
+    color: #424242;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* Liste des utilisateurs */
+#userList {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+
+
+/* Formulaire */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #424242;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Bouton */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #757575; /* Gris comme dans la capture */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #616161; /* Gris plus foncé au survol */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .conteneur {
+        padding: 15px;
+        margin: 20px auto;
+        max-width: 90%;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    #userList li {
+        font-size: 15px;
+    }
+    .form-group input {
+        font-size: 15px;
+    }
+    button {
+        font-size: 15px;
+    }
+}
