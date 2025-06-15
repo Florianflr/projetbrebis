@@ -1,66 +1,93 @@
 <?php
+// Démarrage de la session PHP pour accéder aux variables de session (comme le rôle de l'utilisateur)
 session_start();
 
-// Afficher les erreurs pour le débogage
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Activation de l'affichage des erreurs pour le débogage (à désactiver en production)
+error_reporting(E_ALL); // Affiche toutes les erreurs
+ini_set('display_errors', 1); // Affiche les erreurs à l'écran
 
-// Vérification du rôle
+// Vérification que l'utilisateur est bien un administrateur
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'administrateur') {
+    // Si l'utilisateur n'est pas autorisé, redirection vers la page d'accueil avec un message d'erreur
     header("Location: accueil.php?error=access_denied");
-    exit();
+    exit(); // On arrête le script ici
 }
 
-// Connexion à la base de données
+// Informations de connexion à la base de données
 $servername = "10.0.133.80";
 $username = "admin";
 $password = "mdp_admin";
 $dbname = "brebis";
 
+// Connexion à la base de données MySQL via l'extension mysqli
 $conn = new mysqli($servername, $username, $password, $dbname);
-$conn->set_charset("utf8mb4");
+$conn->set_charset("utf8mb4"); // Encodage UTF-8 pour éviter les problèmes de caractères spéciaux
 
+// Vérification que la connexion s'est bien établie
 if ($conn->connect_error) {
+    // Si erreur de connexion, on arrête tout et on affiche un message
     die("Erreur de connexion : " . $conn->connect_error);
 }
 
+// Initialisation d’un message (affiché après ajout ou suppression d'une brebis)
 $message = "";
+
+// Vérification que la requête est bien envoyée en méthode POST (formulaire)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Ajouter une brebis
+
+    // --- AJOUT D'UNE BREBIS ---
+    // Si le formulaire contient un champ "nom" et PAS de "delete_id", on considère que c’est un ajout
     if (isset($_POST['nom']) && !isset($_POST['delete_id'])) {
+
+        // Récupération et nettoyage des données envoyées par le formulaire
         $nom = trim($_POST['nom']);
         $race = trim($_POST['race']);
         $medaille = trim($_POST['medaille']);
-        $id_troupeau = intval($_POST['id_troupeau']);
+        $id_troupeau = intval($_POST['id_troupeau']); // Conversion en entier
 
+        // Vérification que les champs obligatoires ne sont pas vides
         if (empty($nom) || empty($race)) {
             $message = "Erreur : les champs Nom et Race sont obligatoires.";
         } else {
+            // Préparation de la requête SQL pour éviter les injections
             $stmt = $conn->prepare("INSERT INTO BREBIS_COLLIER (nom, race, medaille, ID_utilisateur, ID_troupeau) VALUES (?, ?, ?, 1, ?)");
+            // Liaison des paramètres à la requête (s = string, i = integer)
             $stmt->bind_param("sssi", $nom, $race, $medaille, $id_troupeau);
+
+            // Exécution de la requête
             if ($stmt->execute()) {
                 $message = "Brebis ajoutée avec succès.";
             } else {
                 $message = "Erreur lors de l'ajout : " . $stmt->error;
             }
+
+            // Fermeture du statement
             $stmt->close();
         }
     }
 
-    // Supprimer une brebis
+    // --- SUPPRESSION D'UNE BREBIS ---
+    // Si le champ "delete_id" est présent, cela signifie que l'utilisateur veut supprimer une brebis
     if (isset($_POST['delete_id'])) {
-        $id_brebis = intval($_POST['delete_id']);
+        $id_brebis = intval($_POST['delete_id']); // Conversion en entier sécurisé
+
+        // Préparation de la requête SQL de suppression
         $delete = $conn->prepare("DELETE FROM BREBIS_COLLIER WHERE ID_brebis = ?");
-        $delete->bind_param("i", $id_brebis);
+        $delete->bind_param("i", $id_brebis); // Liaison de l'identifiant
+
+        // Exécution de la requête
         if ($delete->execute()) {
             $message = "Brebis supprimée avec succès.";
         } else {
             $message = "Erreur lors de la suppression : " . $delete->error;
         }
+
+        // Fermeture du statement
         $delete->close();
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
